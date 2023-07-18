@@ -12,10 +12,10 @@ defmodule Apq.Phase.ApqRawInput do
   end
 
   def run(
-        %Apq{action: :apq_stored, document: document, digest: digest},
+        %Apq{action: :apq_stored, document: document, digest: digest, context: context},
         options
       ) do
-    options[:cache_provider].put(digest, document)
+    options[:cache_provider].put(digest, document, context)
 
     {:ok, document}
   end

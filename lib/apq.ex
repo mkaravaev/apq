@@ -5,7 +5,7 @@ defmodule Apq do
              |> String.split("<!-- MDOC !-->")
              |> Enum.fetch!(1)
 
-  defstruct [:error, :action, :document, :digest]
+  defstruct [:error, :action, :document, :digest, :context]
 
   import Inspect.Algebra
 

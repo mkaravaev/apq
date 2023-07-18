@@ -133,7 +133,8 @@ defmodule Apq.DocumentProvider do
            | document: %Apq{
                action: :apq_stored,
                document: query,
-               digest: digest
+               digest: digest,
+               context: request.context
              }
          }}
 
@@ -153,7 +154,7 @@ defmodule Apq.DocumentProvider do
   end
 
   defp get_document(cache_provider, request, digest) when is_binary(digest) do
-    case cache_provider.get(digest) do
+    case cache_provider.get(digest, request.context) do
       # Cache miss
       {:ok, nil} ->
         {:halt, %{request | document: %Apq{error: :apq_not_found_error}}}
@@ -166,7 +167,8 @@ defmodule Apq.DocumentProvider do
            | document: %Apq{
                action: :apq_found,
                document: document,
-               digest: digest
+               digest: digest,
+               context: request.context
              }
          }}
 

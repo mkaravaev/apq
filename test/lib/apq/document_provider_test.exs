@@ -38,7 +38,7 @@ defmodule Apq.DocumentProviderTest do
     digest = sha256_hexdigest(@query)
 
     Apq.CacheMock
-    |> expect(:get, fn incoming_digest ->
+    |> expect(:get, fn incoming_digest, _opts ->
       assert incoming_digest == digest
       {:ok, nil}
     end)
@@ -61,7 +61,7 @@ defmodule Apq.DocumentProviderTest do
     digest = sha256_hexdigest(@query)
 
     Apq.CacheMock
-    |> expect(:get, fn incoming_digest ->
+    |> expect(:get, fn incoming_digest, _opts ->
       assert incoming_digest == digest
       {:ok, @query}
     end)
@@ -87,7 +87,7 @@ defmodule Apq.DocumentProviderTest do
     query = @query
 
     Apq.CacheMock
-    |> expect(:put, fn incoming_digest, incoming_query ->
+    |> expect(:put, fn incoming_digest, incoming_query, _opts ->
       assert incoming_query == query
       assert incoming_digest == digest
 
@@ -123,7 +123,7 @@ defmodule Apq.DocumentProviderTest do
     extensions = Jason.encode!(%{"persistedQuery" => %{"version" => 1, "sha256Hash" => digest}})
 
     Apq.CacheMock
-    |> expect(:put, fn incoming_digest, incoming_query ->
+    |> expect(:put, fn incoming_digest, incoming_query, _opts ->
       assert incoming_query == query
       assert incoming_digest == digest
 

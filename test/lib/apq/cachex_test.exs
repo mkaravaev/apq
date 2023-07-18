@@ -9,12 +9,12 @@ defmodule Apq.CachexTest do
   defmodule ApqExample.Cachex do
     @behaviour Apq.CacheProvider
 
-    def get(hash) do
+    def get(hash, _opts) do
       send(self(), {:get, hash})
       Cachex.get(:apq_cache, hash)
     end
 
-    def put(hash, query) do
+    def put(hash, query, _opts) do
       send(self(), {:put, hash, query})
       Cachex.put(:apq_cache, hash, query)
     end
@@ -53,7 +53,6 @@ defmodule Apq.CachexTest do
 
   @result ~s({"data":{"item":{"name":"Foo"}}})
 
-  @tag :focus
   test "persists query and reads it back from cache" do
     start_supervised({Cachex, name: :apq_cache})
 

@@ -9,7 +9,7 @@ defmodule Apq.Phase.ApqStoreDocument do
     # remove initial phases, only used for subscriptions and APQ does not deal with that
     blueprint = %{blueprint | initial_phases: []}
 
-    options[:cache_provider].put(options[:digest], blueprint)
+    options[:cache_provider].put(options[:digest], blueprint, options[:context])
 
     {:ok, blueprint}
   end
