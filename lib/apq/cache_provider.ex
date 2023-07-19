@@ -8,7 +8,7 @@ defmodule Apq.CacheProvider do
 
   @type query_doc :: String.t()
 
-  @type opts :: []
+  @type opts :: %{}
 
   @doc """
   Get a query document given a hash from the cache
